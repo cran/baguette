@@ -16,6 +16,7 @@ make_bag_mars <- function() {
   parsnip::set_model_engine("bag_mars", "classification", "earth")
   parsnip::set_model_engine("bag_mars", "regression", "earth")
   parsnip::set_dependency("bag_mars", "earth", "earth")
+  parsnip::set_dependency("bag_mars", "earth", "baguette")
 
   parsnip::set_model_arg(
     model = "bag_mars",
@@ -56,6 +57,18 @@ make_bag_mars <- function() {
     )
   )
 
+  parsnip::set_encoding(
+    model = "bag_mars",
+    eng = "earth",
+    mode = "regression",
+    options = list(
+      predictor_indicators = "none",
+      compute_intercept = FALSE,
+      remove_intercept = FALSE,
+      allow_sparse_x = FALSE
+    )
+  )
+
   parsnip::set_fit(
     model = "bag_mars",
     eng = "earth",
@@ -65,6 +78,18 @@ make_bag_mars <- function() {
       protect = c("formula", "data", "weights"),
       func = c(pkg = "baguette", fun = "bagger"),
       defaults = list(base_model = "MARS")
+    )
+  )
+
+  parsnip::set_encoding(
+    model = "bag_mars",
+    eng = "earth",
+    mode = "classification",
+    options = list(
+      predictor_indicators = "none",
+      compute_intercept = FALSE,
+      remove_intercept = FALSE,
+      allow_sparse_x = FALSE
     )
   )
 
