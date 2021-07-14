@@ -65,7 +65,7 @@ used by CART models (\code{rpart} only).
 \item \code{tree_depth}: The \emph{maximum} depth of a tree (\code{rpart}).
 \item \code{min_n}: The minimum number of data points in a node
 that are required for the node to be split further.
-\item \code{class_cost}: A cost value to asign to the class corresponding to the
+\item \code{class_cost}: A cost value to assign to the class corresponding to the
 first factor level (for 2-class models, \code{rpart} and \code{C5.0} only).
 }
 These arguments are converted to their specific names at the
@@ -82,9 +82,9 @@ following \emph{engines}:
 \item \pkg{R}:  \code{"rpart"} (the default) or \code{"C5.0"} (classification only)
 }
 
-Note that, for \code{rpart} models, but \code{cost_complexity} and
-\code{tree_depth} can be both be specified but the package will give
-precedence to \code{cost_complexity}. Also, \code{tree_depth} values
+Note that, for \code{rpart} models, both \code{cost_complexity} and
+\code{tree_depth} can be specified but the package will give
+precedence to \code{cost_complexity}. Also, for \code{tree_depth} values
 greater than 30 \code{rpart} will give nonsense results on 32-bit
 machines.
 }
@@ -98,8 +98,8 @@ bag_tree(tree_depth = 5) \%>\%
   fit(Species ~ ., data = iris)
 
 
-model <- bag_tree(cost_complexity = 10, min_n = 3)
+model <- bag_tree(cost_complexity = 0.001, min_n = 3)
 model
-update(model, cost_complexity = 1)
-update(model, cost_complexity = 1, fresh = TRUE)
+update(model, cost_complexity = 0.1)
+update(model, cost_complexity = 0.1, fresh = TRUE)
 }
