@@ -10,7 +10,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![CRAN
 status](https://www.r-pkg.org/badges/version/baguette)](https://cran.r-project.org/package=baguette)
 [![Codecov test
-coverage](https://codecov.io/gh/tidymodels/baguette/branch/master/graph/badge.svg)](https://codecov.io/gh/tidymodels/baguette?branch=master)
+coverage](https://codecov.io/gh/tidymodels/baguette/branch/main/graph/badge.svg)](https://app.codecov.io/gh/tidymodels/baguette?branch=main)
 [![R build
 status](https://github.com/tidymodels/baguette/workflows/R-CMD-check/badge.svg)](https://github.com/tidymodels/baguette/actions)
 [![R-CMD-check](https://github.com/tidymodels/baguette/workflows/R-CMD-check/badge.svg)](https://github.com/tidymodels/baguette/actions)
@@ -56,6 +56,19 @@ require("devtools")
 install_github("tidymodels/baguette")
 ```
 
+## Available Engines
+
+The baguette package provides engines for the models in the following
+table.
+
+| model    | engine | mode           |
+|:---------|:-------|:---------------|
+| bag_mars | earth  | classification |
+| bag_mars | earth  | regression     |
+| bag_tree | rpart  | classification |
+| bag_tree | rpart  | regression     |
+| bag_tree | C5.0   | classification |
+
 ## Example
 
 Let’s build a bagged decision tree model to predict a continuous
@@ -63,7 +76,6 @@ outcome.
 
 ``` r
 library(baguette)
-#> Loading required package: parsnip
 
 bag_tree() %>% 
   set_engine("rpart") # C5.0 is also available here
@@ -85,12 +97,11 @@ bag_cars <-
 bag_cars
 #> parsnip model object
 #> 
-#> Fit time:  4s 
 #> Bagged CART (regression with 25 members)
 #> 
 #> Variable importance scores include:
 #> 
-#> # A tibble: 10 x 4
+#> # A tibble: 10 × 4
 #>    term  value std.error  used
 #>    <chr> <dbl>     <dbl> <int>
 #>  1 disp  905.       51.9    25
