@@ -79,15 +79,28 @@ make_c5_spec <- function(opt) {
 
 
 c5_fit  <- function(split, spec, control = control_bag()) {
-  ctrl <- parsnip::fit_control(catch = TRUE)
+  ctrl <- parsnip::control_parsnip(catch = TRUE)
 
   dat <- rsample::analysis(split)
 
   if (control$sampling == "down") {
     dat <- down_sampler(dat)
   }
+  if (any(names(dat) == ".weights")) {
+    wts <- hardhat::importance_weights(dat$.weights)
+    dat$.weights <- NULL
+  } else {
+    wts <- NULL
+  }
 
-  mod <- parsnip::fit.model_spec(spec, .outcome ~ ., data = dat, control = ctrl)
+  mod <-
+    parsnip::fit.model_spec(
+      spec,
+      .outcome ~ .,
+      data = dat,
+      control = ctrl,
+      case_weights = wts
+    )
   mod
 }
 

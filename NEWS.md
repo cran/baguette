@@ -1,3 +1,7 @@
+# baguette 1.0.0
+
+* Enable case weights for `bagger()`. 
+
 # baguette 0.2.0
 
 * Model definitions were moved to parsnip (#47)
