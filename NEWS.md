@@ -1,3 +1,7 @@
+# baguette 1.0.1
+
+* Added a `"nnet"` method for `bagger()`. 
+
 # baguette 1.0.0
 
 * Enable case weights for `bagger()`. 

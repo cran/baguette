@@ -6,7 +6,9 @@
 \alias{baguette-package}
 \title{baguette: Efficient Model Functions for Bagging}
 \description{
-Tree- and rule-based models can be bagged (<doi:10.1007/BF00058655>) using this package and their predictions equations are stored in an efficient format to reduce the model objects size and speed.
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
+Tree- and rule-based models can be bagged (\doi{10.1007/BF00058655}) using this package and their predictions equations are stored in an efficient format to reduce the model objects size and speed.
 }
 \seealso{
 Useful links:
@@ -18,11 +20,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Max Kuhn \email{max@rstudio.com} (\href{https://orcid.org/0000-0003-2402-136X}{ORCID})
+\strong{Maintainer}: Max Kuhn \email{max@posit.co} (\href{https://orcid.org/0000-0003-2402-136X}{ORCID})
 
 Other contributors:
 \itemize{
-  \item RStudio [copyright holder, funder]
+  \item Posit Software, PBC [copyright holder, funder]
 }
 
 }
