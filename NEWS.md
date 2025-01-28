@@ -1,3 +1,7 @@
+# baguette 1.1.0
+
+* Small update with improved error and warning logging. 
+
 # baguette 1.0.2
 
 * Move the earth package to Suggests due to CRAN note about the TeachingDemos (#71).
