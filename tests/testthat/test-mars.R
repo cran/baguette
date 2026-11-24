@@ -97,9 +97,9 @@ test_that('check MARS parsnip interface', {
 
   set.seed(4779)
   expect_error(
-    reg_mod <- bag_mars(num_terms = 5, prod_degree = 2) %>%
-      set_engine("earth", times = 3) %>%
-      set_mode("regression") %>%
+    reg_mod <- bag_mars(num_terms = 5, prod_degree = 2) |>
+      set_engine("earth", times = 3) |>
+      set_mode("regression") |>
       fit(mpg ~ ., data = mtcars),
     regexp = NA
   )
@@ -121,9 +121,9 @@ test_that('check MARS parsnip interface', {
 
   set.seed(4779)
   expect_error(
-    reg_class <- bag_mars(num_terms = 5, prod_degree = 2) %>%
-      set_engine("earth", times = 3) %>%
-      set_mode("classification") %>%
+    reg_class <- bag_mars(num_terms = 5, prod_degree = 2) |>
+      set_engine("earth", times = 3) |>
+      set_mode("classification") |>
       fit(Class ~ ., data = two_class_dat),
     regexp = NA
   )
@@ -155,18 +155,29 @@ test_that('check MARS parsnip interface', {
   expect_equal(update(bag_mars(), prune_method = "none"), bag_mars(prune_method = "none"))
 })
 
+test_that("earth engine arguments are tunable", {
+  res <- bag_mars() |>
+    set_engine("earth") |>
+    set_mode("regression") |>
+    generics::tunable()
+  res <- res[res$name == "nk", ]
+  expect_identical(nrow(res), 1L)
+  expect_identical(res$call_info[[1]]$pkg, "dials")
+  expect_identical(res$call_info[[1]]$fun, "max_num_terms")
+})
+
 test_that('mode specific package dependencies', {
   skip_if_not_installed("earth")
   expect_identical(
-    get_from_env(paste0("bag_mars", "_pkgs")) %>%
-      dplyr::filter(engine == "earth", mode == "classification") %>%
+    get_from_env(paste0("bag_mars", "_pkgs")) |>
+      dplyr::filter(engine == "earth", mode == "classification") |>
       dplyr::pull(pkg),
     list(c("earth", "baguette"))
   )
 
   expect_identical(
-    get_from_env(paste0("bag_mars", "_pkgs")) %>%
-      dplyr::filter(engine == "earth", mode == "regression") %>%
+    get_from_env(paste0("bag_mars", "_pkgs")) |>
+      dplyr::filter(engine == "earth", mode == "regression") |>
       dplyr::pull(pkg),
     list(c("earth", "baguette"))
   )

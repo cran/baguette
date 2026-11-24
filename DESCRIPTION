@@ -1,6 +1,6 @@
 Package: baguette
 Title: Efficient Model Functions for Bagging
-Version: 1.1.0
+Version: 1.2.0
 Authors@R: c(
     person("Max", "Kuhn", , "max@posit.co", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-2402-136X")),
@@ -14,9 +14,9 @@ License: MIT + file LICENSE
 URL: https://baguette.tidymodels.org,
         https://github.com/tidymodels/baguette
 BugReports: https://github.com/tidymodels/baguette/issues
-Depends: parsnip (>= 1.0.0), R (>= 3.6)
-Imports: butcher, C50, cli, dials, dplyr, furrr, generics, hardhat (>=
-        1.1.0), magrittr, purrr, rlang (>= 1.1.0), rpart, rsample,
+Depends: parsnip (>= 1.0.0), R (>= 4.1)
+Imports: butcher, C50, cli, dials (>= 0.0.8), dplyr, furrr, generics,
+        hardhat (>= 1.1.0), purrr, rlang (>= 1.1.0), rpart, rsample,
         tibble, tidyr, utils, withr
 Suggests: covr, earth, modeldata, nnet, recipes, rmarkdown, spelling,
         testthat (>= 3.0.0), yardstick
@@ -25,17 +25,17 @@ Config/testthat/edition: 3
 Config/usethis/last-upkeep: 2024-10-23
 Encoding: UTF-8
 Language: en-US
-RoxygenNote: 7.3.2
 Collate: 'C5.0.R' 'bag_mars_data.R' 'bag_nnet_data.R' 'bag_tree_data.R'
         'import-standalone-types-check.R' 'validate.R' 'bagger.R'
         'baguette-package.R' 'bridge.R' 'cart.R' 'class_cost.R'
         'constructor.R' 'cost_models.R' 'import-standalone-obj-type.R'
         'mars.R' 'misc.R' 'model_info.R' 'nnet.R' 'out-of-bag.R'
         'predict.R' 'var_imp.R' 'zzz.R'
+Config/roxygen2/version: 8.1.1
 NeedsCompilation: no
-Packaged: 2025-01-28 15:42:19 UTC; max
-Author: Max Kuhn [aut, cre] (<https://orcid.org/0000-0003-2402-136X>),
+Packaged: 2026-11-24 22:10:26 UTC; max
+Author: Max Kuhn [aut, cre] (ORCID: <https://orcid.org/0000-0003-2402-136X>),
   Posit Software, PBC [cph, fnd]
 Maintainer: Max Kuhn <max@posit.co>
 Repository: CRAN
-Date/Publication: 2025-01-28 16:20:02 UTC
+Date/Publication: 2026-11-24 22:50:02 UTC

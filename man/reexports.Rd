@@ -3,7 +3,6 @@
 \docType{import}
 \name{reexports}
 \alias{reexports}
-\alias{\%>\%}
 \alias{var_imp}
 \title{Objects exported from other packages}
 \keyword{internal}
@@ -12,8 +11,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{generics}{\code{\link[generics]{var_imp}}}
-
-  \item{magrittr}{\code{\link[magrittr:pipe]{\%>\%}}}
+  \item{generics}{\code{\link[generics:var_imp]{var_imp()}}}
 }}
 

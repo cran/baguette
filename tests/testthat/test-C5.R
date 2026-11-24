@@ -70,9 +70,9 @@ test_that('check C5 parsnip interface', {
 
   set.seed(4779)
   expect_error(
-    class_mod <- bag_tree(min_n = 3) %>%
-      set_engine("C5.0", times = 3) %>%
-      set_mode("classification") %>%
+    class_mod <- bag_tree(min_n = 3) |>
+      set_engine("C5.0", times = 3) |>
+      set_mode("classification") |>
       fit(Class ~ ., data = two_class_dat),
     regexp = NA
   )
@@ -100,9 +100,9 @@ test_that('check C5 parsnip interface', {
 
   set.seed(4779)
   expect_error(
-    class_cost <- bag_tree(min_n = 3, class_cost = 2) %>%
-      set_engine("C5.0", times = 3) %>%
-      set_mode("classification") %>%
+    class_cost <- bag_tree(min_n = 3, class_cost = 2) |>
+      set_engine("C5.0", times = 3) |>
+      set_mode("classification") |>
       fit(Class ~ ., data = two_class_dat),
     regexp = NA
   )
@@ -140,17 +140,41 @@ test_that('check C5 parsnip interface', {
 
 })
 
+test_that("C5.0 engine arguments are tunable", {
+  res <- bag_tree() |>
+    set_engine("C5.0") |>
+    set_mode("classification") |>
+    generics::tunable()
+  eng_args <- c("CF", "noGlobalPruning", "winnow", "fuzzyThreshold")
+  res <- res[res$name %in% eng_args, ]
+  expect_named(
+    res,
+    c("name", "call_info", "source", "component", "component_id")
+  )
+  expect_identical(res$name, eng_args)
+  expect_identical(
+    purrr::map_chr(res$call_info, "fun"),
+    c(
+      "confidence_factor",
+      "no_global_pruning",
+      "predictor_winnowing",
+      "fuzzy_thresholding"
+    )
+  )
+  expect_identical(purrr::map_chr(res$call_info, "pkg"), rep("dials", 4))
+})
+
 test_that('mode specific package dependencies', {
   expect_identical(
-    get_from_env(paste0("bag_tree", "_pkgs")) %>%
-      dplyr::filter(engine == "C5.0", mode == "classification") %>%
+    get_from_env(paste0("bag_tree", "_pkgs")) |>
+      dplyr::filter(engine == "C5.0", mode == "classification") |>
       dplyr::pull(pkg),
     list(c("C50", "baguette"))
   )
 
   expect_identical(
-    get_from_env(paste0("bag_tree", "_pkgs")) %>%
-      dplyr::filter(engine == "C5.0", mode == "regression") %>%
+    get_from_env(paste0("bag_tree", "_pkgs")) |>
+      dplyr::filter(engine == "C5.0", mode == "regression") |>
       dplyr::pull(pkg),
     list()
   )
